@@ -14,7 +14,7 @@ export const PACK_FEATURED_CATALOG = [
   {
     tokenId: "0108",
     name: "Jack",
-    image: "/branding/pack-jack-transparent.png?v=2",
+    image: "/branding/pack-jack-transparent.png?v=3",
     rarity: "Rare",
     personality: "Poolside legend",
   },

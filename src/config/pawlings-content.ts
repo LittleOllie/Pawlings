@@ -244,7 +244,7 @@ export const pawlingsContent = {
         mirrored: false,
       },
       {
-        image: "/branding/pack-jack-transparent.png?v=2",
+        image: "/branding/pack-jack-transparent.png?v=3",
         name: "Jack",
         trait: "Poolside legend",
         stamp: "Duck Float Captain",

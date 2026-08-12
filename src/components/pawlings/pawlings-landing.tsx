@@ -7,7 +7,7 @@ import { PawlingsFooter } from "./pawlings-footer";
 import { GameButton } from "./game-button";
 import { useAdoptionOverlay } from "./adoption-overlay-context";
 import { FaqAccordion } from "./faq-accordion";
-import { CharacterCard } from "./character-card";
+import { PackShowcase } from "./pack-showcase";
 import { PawlingDogImage } from "./pawling-dog-image";
 import { PawlingsColoredHeading } from "./pawlings-colored-heading";
 import { PawlingsSharedLogo } from "./intro/pawlings-shared-logo";
@@ -137,19 +137,6 @@ export function PawlingsLanding({
           </div>
         </section>
 
-        {/* Trust strip */}
-        <section className="px-4 sm:px-6 pb-4" aria-label="Adoption programme information">
-          <div className="mx-auto max-w-4xl trust-strip">
-            <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              {pawlingsContent.trustStrip.items.map((item) => (
-                <li key={item} className="trust-strip-item">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         {/* Meet the Pawlings */}
         <section id="meet-the-pack" className="section-flow px-4 sm:px-6 scroll-mt-28">
           <SectionReveal className="mx-auto max-w-6xl">
@@ -182,18 +169,8 @@ export function PawlingsLanding({
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                {pawlingsContent.characters.featured.map((dog) => (
-                  <CharacterCard
-                    key={dog.name}
-                    image={dog.image}
-                    imageAlt={pawlingsContent.assets.dogAlt}
-                    name={dog.name}
-                    trait={dog.trait}
-                    stamp={dog.stamp}
-                    mirrored={dog.mirrored ?? false}
-                  />
-                ))}
+              <div className="flex justify-center lg:justify-end">
+                <PackShowcase />
               </div>
             </div>
           </SectionReveal>

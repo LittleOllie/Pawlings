@@ -113,14 +113,15 @@ export function RoadmapSection() {
           const isLast = index === roadmap.phases.length - 1;
 
           return (
-            <li key={phase.id} className="relative">
+            <li key={phase.id} className={cn("relative", index > 0 && "pt-2 sm:pt-4")}>
               {!isLast && (
-                <div className="roadmap-trail-spine absolute left-1/2 top-full z-0 hidden h-12 w-0.5 -translate-x-1/2 bg-gradient-to-b from-pawlings-lime/40 to-pawlings-purple/30 sm:block" aria-hidden />
+                <div className="roadmap-trail-spine absolute left-1/2 top-full z-0 hidden -translate-x-1/2 sm:block" aria-hidden />
               )}
 
               <article
                 className={cn(
-                  "roadmap-stop relative z-10 pb-2",
+                  "roadmap-stop relative z-10",
+                  !isLast ? "pb-4 sm:pb-6" : "pb-2",
                   isMystery && "roadmap-stop--mystery"
                 )}
               >
@@ -247,8 +248,7 @@ export function RoadmapSection() {
                 </GameCard>
               </article>
 
-              {!isLast && <PawTrail className="sm:hidden" />}
-              {!isLast && index === 0 && <PawTrail className="hidden sm:flex" />}
+              {!isLast && <PawTrail />}
             </li>
           );
         })}

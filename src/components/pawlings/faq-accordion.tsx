@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 export function FaqAccordion() {
   const baseId = useId();
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <div className="faq-signpost space-y-3">

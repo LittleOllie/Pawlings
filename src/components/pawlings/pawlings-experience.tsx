@@ -91,6 +91,7 @@ function PawlingsExperienceInner(props: PawlingsExperienceProps) {
                 variant="intro"
                 layout
                 priority
+                sceneHalo
                 showGlint={introState === "ready"}
                 animateEnter={introState === "entering"}
               />

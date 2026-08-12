@@ -236,6 +236,19 @@ export function AdoptionApplicationFlow({
 
       <AdoptionProgress current={stepIndex} total={STEPS.length} />
 
+      {onDismiss && stepIndex === 0 && (
+        <div className="flex justify-end -mt-1 mb-3">
+          <button
+            type="button"
+            onClick={onDismiss}
+            disabled={submitting}
+            className="adoption-papers-dismiss"
+          >
+            {copy.close}
+          </button>
+        </div>
+      )}
+
       {stepIndex > 0 && (
         <button
           type="button"
@@ -422,35 +435,22 @@ export function AdoptionApplicationFlow({
           </div>
         )}
 
-        <div className="flex flex-col-reverse sm:flex-row gap-3 pt-2">
-          {(stepIndex > 0 || onDismiss) && (
-            <GameButton
-              type="button"
-              variant="secondary"
-              onClick={stepIndex > 0 ? goBack : onDismiss}
-              disabled={submitting}
-              className="sm:flex-1 adoption-papers-back-btn"
-            >
-              <ChevronLeft className="h-4 w-4" aria-hidden />
-              {stepIndex > 0 ? copy.back : copy.close}
-            </GameButton>
-          )}
+        <div className="flex flex-col gap-2.5 pt-2">
           {step === "statement" && (
-            <GameButton
+            <button
               type="button"
-              variant="ghost"
               onClick={() => setStepIndex((i) => i + 1)}
-              className="sm:flex-1 !text-paper-text-muted"
+              className="adoption-papers-skip-link"
             >
               {copy.skip}
-            </GameButton>
+            </button>
           )}
           <GameButton
             type="submit"
-            fullWidth={stepIndex === 0}
+            fullWidth
             loading={submitting}
             disabled={submitting}
-            className={cn(stepIndex > 0 && "sm:flex-[2]")}
+            className="adoption-papers-continue-btn"
           >
             {step === "sign"
               ? submitting

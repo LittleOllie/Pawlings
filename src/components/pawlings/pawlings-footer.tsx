@@ -48,12 +48,6 @@ export function PawlingsFooter({ xUrl }: PawlingsFooterProps) {
           >
             {pawlingsContent.footer.terms}
           </Link>
-          <Link
-            href="/admin/login"
-            className="text-pawlings-muted/60 hover:text-pawlings-muted text-xs transition-colors min-h-[44px] inline-flex items-center"
-          >
-            {pawlingsContent.footer.admin}
-          </Link>
         </div>
       </div>
       <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-pawlings-muted/70 leading-relaxed">

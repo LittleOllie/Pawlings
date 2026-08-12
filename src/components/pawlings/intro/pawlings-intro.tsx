@@ -198,6 +198,7 @@ export function PawlingsIntroOverlay({
 
           {/* Logo — flex-shrinkable, never overlaps chrome above/below */}
           <div className="intro-logo-slot flex min-h-0 w-full flex-1 items-center justify-center">
+            <span className="intro-logo-halo" aria-hidden />
             {logoSlot}
           </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PawlingsHeader } from "@/components/pawlings/pawlings-header";
 import { PawlingsFooter } from "@/components/pawlings/pawlings-footer";
 import { WorldBackground } from "@/components/pawlings/world-background";
@@ -38,6 +38,7 @@ export function DashboardClient({ xUrl, accessMode }: DashboardClientProps) {
   const [checkInLoading, setCheckInLoading] = useState(false);
   const [actionMessage, setActionMessage] = useState<string | null>(null);
   const [shareOpen, setShareOpen] = useState(false);
+  const fetchRequestId = useRef(0);
 
   const activeWalletAddress = wallet.isConnected
     ? wallet.address
@@ -50,33 +51,51 @@ export function DashboardClient({ xUrl, accessMode }: DashboardClientProps) {
 
   const fetchState = useCallback(async () => {
     if (!activeWalletAddress) return;
+
+    const requestId = ++fetchRequestId.current;
     setLoading(true);
     setError(null);
+
     try {
       const params = new URLSearchParams({ wallet: activeWalletAddress });
-      if (selectedTokenId) params.set("selected", selectedTokenId);
       const res = await fetch(`/api/dashboard/state?${params.toString()}`);
       if (!res.ok) {
         const data = (await res.json()) as { error?: string };
         throw new Error(data.error ?? "Failed to load dashboard.");
       }
       const data = (await res.json()) as DashboardState;
+      if (requestId !== fetchRequestId.current) return;
+
       setState(data);
-      setSelectedTokenId(data.selectedTokenId);
+      setSelectedTokenId((current) => {
+        if (current && data.pawlings.some((p) => p.tokenId === current)) {
+          return current;
+        }
+        return data.pawlings[0]?.tokenId ?? null;
+      });
     } catch (err) {
+      if (requestId !== fetchRequestId.current) return;
       setError(err instanceof Error ? err.message : "Failed to load dashboard.");
     } finally {
-      setLoading(false);
+      if (requestId === fetchRequestId.current) {
+        setLoading(false);
+      }
     }
-  }, [activeWalletAddress, selectedTokenId]);
+  }, [activeWalletAddress]);
 
   useEffect(() => {
     if (sessionActive) {
       void fetchState();
     } else {
+      fetchRequestId.current += 1;
       setState(null);
+      setSelectedTokenId(null);
     }
   }, [sessionActive, activeWalletAddress, fetchState]);
+
+  function handleSelectPawling(tokenId: string) {
+    setSelectedTokenId(tokenId);
+  }
 
   function disconnectWallet() {
     wallet.disconnect();
@@ -278,7 +297,7 @@ export function DashboardClient({ xUrl, accessMode }: DashboardClientProps) {
               <MyPawlingsRow
                 pawlings={state.pawlings}
                 selectedTokenId={selectedTokenId}
-                onSelect={setSelectedTokenId}
+                onSelect={handleSelectPawling}
               />
 
               <SelectedPawlingPanel

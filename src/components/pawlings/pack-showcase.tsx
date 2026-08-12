@@ -47,17 +47,26 @@ export function PackShowcase() {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="pack-showcase-image-wrap">
-              <Image
-                src={dog.image}
-                alt={`${dog.name}, ${dog.trait}`}
-                width={420}
-                height={420}
-                priority={active === 0}
-                className={cn(
-                  "pack-showcase-image animate-dog-float",
-                  dog.mirrored && "-scale-x-100"
-                )}
-              />
+              <div
+                className="pack-showcase-image-scale"
+                style={
+                  "imageScale" in dog && dog.imageScale
+                    ? { ["--pack-image-scale" as string]: String(dog.imageScale) }
+                    : undefined
+                }
+              >
+                <Image
+                  src={dog.image}
+                  alt={`${dog.name}, ${dog.trait}`}
+                  width={420}
+                  height={420}
+                  priority={active === 0}
+                  className={cn(
+                    "pack-showcase-image animate-dog-float",
+                    dog.mirrored && "-scale-x-100"
+                  )}
+                />
+              </div>
             </div>
             <h3 className="font-display font-bold text-xl sm:text-2xl text-pawlings-white">
               {dog.name}

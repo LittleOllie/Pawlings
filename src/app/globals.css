@@ -337,6 +337,14 @@
     margin-bottom: 0.85rem;
   }
 
+  .pack-showcase-image-scale {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transform: scale(var(--pack-image-scale, 1));
+    transform-origin: center bottom;
+  }
+
   @media (min-width: 640px) {
     .pack-showcase-image-wrap {
       min-height: 14.5rem;
@@ -2543,6 +2551,12 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
+  .holder-stat-card {
+    border-radius: var(--radius-panel);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.15);
+  }
+
   .future-highlight-card {
     border: 1px solid rgba(168, 239, 36, 0.15);
     background: rgba(168, 239, 36, 0.05);
@@ -2874,6 +2888,44 @@
 
   .roadmap-adventure-step {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .roadmap-raise-steps .roadmap-adventure-step {
+    min-height: 11.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .roadmap-raise-steps .roadmap-adventure-step {
+      min-height: 13.5rem;
+    }
+  }
+
+  .roadmap-step-bg-dog-wrap {
+    position: absolute;
+    inset: 0.35rem;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .roadmap-step-bg-dog-wrap--compact {
+    inset: 37.5%;
+  }
+
+  .roadmap-step-bg-dog {
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.13;
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.06));
+  }
+
+  @media (min-width: 640px) {
+    .roadmap-step-bg-dog-wrap {
+      inset: 0.5rem;
+    }
+
+    .roadmap-step-bg-dog {
+      opacity: 0.12;
+    }
   }
 
   .roadmap-stop--mystery .collectible-card {

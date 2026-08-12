@@ -52,7 +52,8 @@ export function PawlingsHeader({ xUrl, subpage }: PawlingsHeaderProps) {
   };
 
   const renderNavLinks = (mobile = false) =>
-    NAV_LINKS.map((link) => {
+    <>
+      {NAV_LINKS.map((link) => {
       const isActive = linkIsActive(link);
 
       if (link.type === "route") {
@@ -92,7 +93,8 @@ export function PawlingsHeader({ xUrl, subpage }: PawlingsHeaderProps) {
           {link.label}
         </a>
       );
-    });
+    })}
+    </>;
 
   const xLinkClass = cn(
     navLinkClass,

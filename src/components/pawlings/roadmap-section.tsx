@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Lock } from "lucide-react";
 import { pawlingsContent } from "@/config/pawlings-content";
 import { GameCard } from "./game-card";
-import { PawlingDogImage } from "./pawling-dog-image";
 import { PawlingsColoredHeading } from "./pawlings-colored-heading";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +35,12 @@ const pawTrailColors = [
   "#a64de8",
   "#ffc928",
 ];
+
+const raisePawlingsStepBackgrounds = [
+  pawlingsContent.assets.pupsilver,
+  pawlingsContent.assets.dog2,
+  pawlingsContent.assets.dog1,
+] as const;
 
 function PhaseHeader({ phase }: { phase: RoadmapPhase }) {
   const highlight = phaseTitleHighlights[phase.id] ?? phase.title.split(" ").pop() ?? phase.title;
@@ -87,7 +92,6 @@ function hasItems(
     description?: string;
     emoji: string;
     accent?: keyof typeof stepAccent;
-    visual?: string;
   }[];
 } {
   return "items" in phase && Array.isArray(phase.items);
@@ -99,7 +103,6 @@ function hasTags(phase: RoadmapPhase): phase is RoadmapPhase & { tags: readonly 
 
 export function RoadmapSection() {
   const roadmap = pawlingsContent.roadmap;
-  const assets = pawlingsContent.assets;
 
   return (
     <div className="roadmap-trail relative mx-auto max-w-4xl">
@@ -157,7 +160,16 @@ export function RoadmapSection() {
                   )}
                 >
                   {isMystery ? (
-                    <MysteryDen phase={phase} symbol={roadmap.mysterySymbol} text={roadmap.mysteryText} />
+                    <MysteryDen
+                      phase={phase}
+                      symbol={roadmap.mysterySymbol}
+                      text={roadmap.mysteryText}
+                      lockedBadge={
+                        "lockedBadge" in phase && typeof phase.lockedBadge === "string"
+                          ? phase.lockedBadge
+                          : "Coming soon"
+                      }
+                    />
                   ) : (
                     <>
                       <PhaseHeader phase={phase} />
@@ -174,35 +186,35 @@ export function RoadmapSection() {
 
                       {hasItems(phase) && (
                         <div className="mt-6 space-y-5">
-                          <div className="hidden sm:flex items-end justify-between gap-2 px-2 -mb-2" aria-hidden>
-                            <PawlingDogImage
-                              src={assets.dog1}
-                              alt=""
-                              decorative
-                              className="w-16 opacity-90"
-                              floatDelay="short"
-                            />
-                            <div className="flex-1 flex items-center justify-center gap-2 pb-4">
-                              <span className="text-2xl animate-logo-float">🐶</span>
-                              <span className="text-pawlings-yellow text-sm">· · ·</span>
-                              <span className="text-2xl animate-logo-float" style={{ animationDelay: "0.5s" }}>🐕</span>
-                            </div>
-                            <PawlingDogImage
-                              src={assets.dog2}
-                              alt=""
-                              decorative
-                              mirrored
-                              className="w-16 opacity-90"
-                              floatDelay="long"
-                            />
-                          </div>
-
-                          <ol className="grid gap-4 sm:grid-cols-3">
+                          <ol
+                            className={cn(
+                              "grid gap-4 sm:grid-cols-3",
+                              phase.id === "phase-2" && "roadmap-raise-steps"
+                            )}
+                          >
                             {phase.items.map((item, stepIndex) => (
                               <li
                                 key={item.title}
-                                className="roadmap-adventure-step rounded-2xl border border-white/10 bg-black/20 p-4 text-left transition-transform hover:scale-[1.03]"
+                                className="roadmap-adventure-step relative overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-4 text-left transition-transform hover:scale-[1.03]"
                               >
+                                {phase.id === "phase-2" && raisePawlingsStepBackgrounds[stepIndex] ? (
+                                  <div
+                                    className={cn(
+                                      "roadmap-step-bg-dog-wrap",
+                                      stepIndex === 0 && "roadmap-step-bg-dog-wrap--compact"
+                                    )}
+                                    aria-hidden
+                                  >
+                                    <Image
+                                      src={raisePawlingsStepBackgrounds[stepIndex]}
+                                      alt=""
+                                      fill
+                                      sizes="(max-width: 640px) 100vw, 280px"
+                                      className="roadmap-step-bg-dog pointer-events-none select-none"
+                                    />
+                                  </div>
+                                ) : null}
+                                <div className="relative z-[1]">
                                 <div
                                   className={cn(
                                     "mb-3 flex h-12 w-12 items-center justify-center rounded-2xl text-2xl ring-4",
@@ -231,13 +243,7 @@ export function RoadmapSection() {
                                     {item.description}
                                   </p>
                                 )}
-                                {item.visual === "evolution" && (
-                                  <div className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-pawlings-orange/10 py-2 border border-pawlings-orange/20">
-                                    <span className="text-xl">🐶</span>
-                                    <span className="text-xs text-pawlings-yellow">✨</span>
-                                    <span className="text-xl">🐕</span>
-                                  </div>
-                                )}
+                                </div>
                               </li>
                             ))}
                           </ol>
@@ -261,10 +267,12 @@ function MysteryDen({
   phase,
   symbol,
   text,
+  lockedBadge,
 }: {
   phase: RoadmapPhase;
   symbol: string;
   text: string;
+  lockedBadge: string;
 }) {
   return (
     <>
@@ -286,7 +294,7 @@ function MysteryDen({
             </span>
             <span className="locked-collectible-badge">
               <Lock className="h-3 w-3" aria-hidden />
-              Sniffing soon
+              {lockedBadge}
             </span>
           </div>
         </div>

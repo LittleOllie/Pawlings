@@ -7,7 +7,7 @@ export function normalizeWalletAddress(address: string): string {
 export function isValidWalletAddress(address: string): boolean {
   const trimmed = address.trim();
   if (!trimmed.startsWith("0x")) return false;
-  return isAddress(trimmed);
+  return isAddress(trimmed, { strict: false });
 }
 
 export function toChecksumAddress(address: string): string {

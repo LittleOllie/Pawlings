@@ -16,6 +16,7 @@ export const pawlingsContent = {
   assets: {
     dog1: "/branding/Dog1Transparent.png",
     dog2: "/branding/Dog2Transparent.png",
+    pupsilver: "/branding/pupsilver-transparent.png",
     dogAlt: "Colourful Pawling character",
     pawBg: "/branding/pawBG.png",
     officialStamp: "/branding/pawlings-official-stamp.png",
@@ -184,7 +185,7 @@ export const pawlingsContent = {
     headingHighlight: "Roadmap",
     trailLabel: "Follow the paw prints",
     mysterySymbol: "?????",
-    mysteryText: "Something's sniffing around in the den…",
+    mysteryText: "The pack is cooking up something wild — stay close.",
     phases: [
       {
         id: "phase-1",
@@ -210,7 +211,6 @@ export const pawlingsContent = {
             description: "Feed, play, and care for your companion every day.",
             emoji: "🦴",
             accent: "orange" as const,
-            visual: "evolution" as const,
           },
           {
             title: "Watch them grow",
@@ -224,7 +224,8 @@ export const pawlingsContent = {
         id: "phase-3",
         label: "Phase 3",
         title: "Top Secret",
-        tagline: "Even we don't know what's in the doghouse yet.",
+        tagline: "A lot of fun and adventure in the works.",
+        lockedBadge: "Adventure incoming",
         mysterious: true,
       },
     ],
@@ -243,7 +244,7 @@ export const pawlingsContent = {
         mirrored: false,
       },
       {
-        image: "/branding/pack-jack-transparent.png",
+        image: "/branding/pack-jack-transparent.png?v=2",
         name: "Jack",
         trait: "Poolside legend",
         stamp: "Duck Float Captain",
@@ -255,6 +256,7 @@ export const pawlingsContent = {
         trait: "Flower crown energy",
         stamp: "Certified Good Dog",
         mirrored: false,
+        imageScale: 1.12,
       },
       {
         image: "/branding/pack-riot-transparent.png",

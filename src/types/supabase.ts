@@ -261,6 +261,123 @@ export interface Database {
         Update: never;
         Relationships: [];
       };
+      holder_profiles: {
+        Row: {
+          wallet_address: string;
+          wallet_address_normalized: string;
+          treats: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          wallet_address: string;
+          wallet_address_normalized: string;
+          treats?: number;
+        };
+        Update: Partial<{
+          treats: number;
+          updated_at: string;
+        }>;
+        Relationships: [];
+      };
+      pawling_care_state: {
+        Row: {
+          id: string;
+          wallet_address_normalized: string;
+          pawling_token_id: string;
+          hunger: number;
+          happiness: number;
+          bond: number;
+          xp: number;
+          level: number;
+          growth_stage: number;
+          last_fed_at: string | null;
+          last_played_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          wallet_address_normalized: string;
+          pawling_token_id: string;
+          hunger?: number;
+          happiness?: number;
+          bond?: number;
+          xp?: number;
+          level?: number;
+          growth_stage?: number;
+          last_fed_at?: string | null;
+          last_played_at?: string | null;
+          updated_at?: string;
+        };
+        Update: Partial<{
+          hunger: number;
+          happiness: number;
+          bond: number;
+          xp: number;
+          level: number;
+          growth_stage: number;
+          last_fed_at: string | null;
+          last_played_at: string | null;
+          updated_at: string;
+        }>;
+        Relationships: [];
+      };
+      pawling_activity: {
+        Row: {
+          id: string;
+          wallet_address_normalized: string;
+          pawling_token_id: string | null;
+          activity_type: string;
+          metadata: Json;
+          created_at: string;
+        };
+        Insert: {
+          wallet_address_normalized: string;
+          pawling_token_id?: string | null;
+          activity_type: string;
+          metadata?: Json;
+        };
+        Update: never;
+        Relationships: [];
+      };
+      social_mission_completions: {
+        Row: {
+          id: string;
+          wallet_address_normalized: string;
+          mission_id: string;
+          period_key: string;
+          reward: number;
+          completed_at: string;
+        };
+        Insert: {
+          wallet_address_normalized: string;
+          mission_id: string;
+          period_key: string;
+          reward?: number;
+        };
+        Update: never;
+        Relationships: [];
+      };
+      daily_care_completions: {
+        Row: {
+          id: string;
+          wallet_address_normalized: string;
+          task_id: string;
+          period_key: string;
+          reward_treats: number;
+          reward_xp: number;
+          completed_at: string;
+        };
+        Insert: {
+          wallet_address_normalized: string;
+          task_id: string;
+          period_key: string;
+          reward_treats?: number;
+          reward_xp?: number;
+        };
+        Update: never;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

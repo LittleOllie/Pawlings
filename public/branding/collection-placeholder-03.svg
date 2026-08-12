@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#242220"/>
+  <circle cx="130" cy="140" r="30" fill="#c4785a" opacity="0.2"/>
+  <circle cx="200" cy="120" r="35" fill="#7a9e7e" opacity="0.2"/>
+  <circle cx="270" cy="140" r="30" fill="#c4785a" opacity="0.2"/>
+  <path d="M130 170 Q200 200 270 170" stroke="#3d3a36" stroke-width="2" fill="none"/>
+  <text x="200" y="260" text-anchor="middle" fill="#6b665e" font-family="system-ui" font-size="12">The Community</text>
+</svg>

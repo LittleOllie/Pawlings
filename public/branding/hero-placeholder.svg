@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <rect width="600" height="600" fill="#1a1917"/>
+  <circle cx="300" cy="280" r="120" fill="#242220" stroke="#3d3a36" stroke-width="2"/>
+  <circle cx="300" cy="280" r="80" fill="none" stroke="#c4785a" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="300" cy="280" r="40" fill="#c4785a" opacity="0.3"/>
+  <ellipse cx="300" cy="480" rx="180" ry="20" fill="#0f0e0d" opacity="0.5"/>
+  <path d="M180 200 Q300 80 420 200" stroke="#7a9e7e" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M200 350 Q300 420 400 350" stroke="#7a9e7e" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <text x="300" y="560" text-anchor="middle" fill="#6b665e" font-family="Georgia, serif" font-size="14">Artwork Placeholder</text>
+</svg>
